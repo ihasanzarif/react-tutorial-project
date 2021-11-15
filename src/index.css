@@ -25,3 +25,19 @@ code {
   padding: 15px;
   border: 2px solid royalblue;
 }
+
+.employeeTable{
+  margin: 10px;
+}
+
+.employeeTable tr th{
+  padding: 5px;
+  border: 2px red solid;
+  border-collapse:collapse;
+}
+
+.employeeTable tr td{
+  padding: 5px;
+  border: 2px royalblue solid;
+  border-collapse:collapse;
+}

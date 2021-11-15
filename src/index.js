@@ -1,8 +1,11 @@
-import { render } from "@testing-library/react";
 import React from "react";
-import reactDom from "react-dom";
 import ReactDOM from "react-dom";
 import './index.css';
+import axios from 'axios';
+import {BrowserRouter, Link, Routes, Route} from 'react-router-dom'
+import Employee from "./employee";
+import Department from "./department"
+import Project from "./project";
 
 // //---Practice Code 1---//
 // const element = <h1 className="testClass">Welcome to Zarif's World.....</h1>;
@@ -359,45 +362,215 @@ import './index.css';
 
 // //---Practice Code 11---//
 // const employees = [
-//   {Id: 230, Name: "Amimul Ihasan", Location: "Panthapath", Salary: 50000},
-//   {Id: 283, Name: "Faria Jaman", Location: "Banani", Salary: 45000},
-//   {Id: 238, Name: "Ramisa Islam", Location: "Dhanmondi", Salary: 55000}
+//   {Id : 120, Name: 'Rashida Jaman', Location : 'Mohammadpur', Salary : 74000},
+//   {Id : 120, Name: 'Kamal Rahman', Location : 'Kochukhet', Salary : 85000},
+//   {Id : 120, Name: 'Rozina Yasmin', Location : 'Mirpur DOHS', Salary : 78000},
 // ];
 
 // function Employee(props){
-//   return <div className="addEmployee">
+//   return <div>
+//     <h1>Employee Details</h1>
 //     <p>
-//       <label>Employee ID: </label><b>{props.data.Id}</b>
+//       <label>Employee ID : </label><b>{props.data.Id}</b>
 //     </p>
 //     <p>
-//       <label>Employee Name: </label><b>{props.data.Name}</b>
+//       <label>Employee Name : </label><b>{props.data.Name}</b>
 //     </p>
 //     <p>
-//       <label>Employee Location: </label><b>{props.data.Location}</b>
+//       <label>Employee Location : </label><b>{props.data.Location}</b>
 //     </p>
 //     <p>
-//       <label>Employee Salary: </label><b>{props.data.Salary}</b>
+//       <label>Employee Salary : </label><b>{props.data.Salary}</b>
 //     </p>
 //   </div>
 // }
 
-// function DisplayEmployees(props){
-//   const  employeeList = props.empList;
-//   const listElements = employeeList.map((emp) => 
+// function DisplayEmployeeData(props){
+//   const empList = props.employeeList;
+//   const listElements = empList.map((emp) =>
 //     <Employee key={emp.Id} data={emp}></Employee>
 //   );
 
-//   return (
-//     <div>
-//       {listElements}
-//     </div>
-//   )
+//   return(<div>
+//     {listElements}
+//   </div>);
 // }
 
-// const element = <DisplayEmployees empList={employees}></DisplayEmployees>;
+// const element = <DisplayEmployeeData employeeList={employees}></DisplayEmployeeData>
+
+// ReactDOM.render(element, document.getElementById("root"))
+// //---Practice Code 12---//
+
+// class EmployeeComponent extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       employees: []
+//     }
+//   }
+
+//   componentDidMount() {
+//     const newLocal = "https://localhost:44341/api/Employee";
+//     axios.get(newLocal).then(
+//       result => {
+//         console.log(result.data, "adsas")
+//         const employees = result.data;
+//         this.setState({ employees });
+//       })
+//   }
+
+//   render() {
+//     return <div>
+//       <h1>Employee Details</h1>
+//       <table>
+//         <thead>
+//           <tr>
+//             <th>ID</th>
+//             <th>Name</th>
+//             <th>Location</th>
+//             <th>Salary</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {this.state.employees.map((emp, index) =>
+//             <tr key={index}>
+//               <td>{emp.name}</td>
+//               <td>{emp.location}</td>
+//               <td>{emp.salary}</td>
+//             </tr>
+//           )}
+//         </tbody>
+
+//       </table>
+//     </div>;
+//   }
+// }
+
+// const element = <EmployeeComponent></EmployeeComponent>
+
+// ReactDOM.render(element, document.getElementById("root"))
+
+// //---Practice Code 13---//
+
+// class EmployeeComponent extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+//   state = {
+//     employees : [],
+//     message: ''
+//   }
+
+//   componentDidMount(){
+//     this.getEmployeeData();
+//   }
+
+//   getEmployeeData=()=>{
+//     const newLocal = "https://localhost:44341/api/Employee";
+//     axios.get(newLocal).then(result =>{
+//       const employees = result.data;
+//       this.setState({employees})
+//     })
+//   }
+
+//   createPost = () =>{
+//     const newLocal = "https://localhost:44341/api/Employee";
+//     const employee = { 
+//       Id: this.refs.id.value, 
+//       Name: this.refs.name.value, 
+//       Location: this.refs.location.value, 
+//       Salary: this.refs.salary.value 
+//     };
+//     axios.post(newLocal, employee)
+//       .then(response => {
+//         console.log(response.data, "adsas")
+//         const result = response.data;
+//         this.setState({ message : result.toString()})
+//       });
+//   this.clearForm();
+//   this.getEmployeeData();
+//   }
+
+//   clearForm(){
+//     this.refs.id.value = '';
+//     this.refs.name.value ='';
+//     this.refs.location.value = '';
+//     this.refs.salary.value = ''
+//   }
+
+//   render() {
+//     return <div>
+//       <h1>Employee Details</h1>
+//       <table className="employeeTable">
+//         <thead>
+//           <tr>
+//             <th>Employee ID : </th>
+//             <td><input type="type" ref="id"/></td>
+//           </tr>
+//           <tr>
+//             <th>Employee Name : </th>
+//             <td><input type="type" ref="name"/></td>
+//           </tr>
+//           <tr>
+//             <th>Employee Location : </th>
+//             <td><input type="type" ref="location"/></td>
+//           </tr>
+//           <tr>
+//             <th>Employee Salary : </th>
+//             <td><input type="type" ref="salary"/></td>
+//           </tr>
+//           <tr>
+//             <th></th>
+//             <td><button onClick={this.createPost}>Save</button></td>
+//           </tr>
+//         </thead>
+//       </table>
+      
+//       <table className="employeeTable">
+//         <thead>
+//           <tr>
+//             <th>ID</th>
+//             <th>Name</th>
+//             <th>Location</th>
+//             <th>Salary</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {this.state.employees.map((emp, index) =>
+//             <tr key={index}>
+//               <td>{emp.id}</td>
+//               <td>{emp.name}</td>
+//               <td>{emp.location}</td>
+//               <td>{emp.salary}</td>
+//             </tr>
+//           )}
+//         </tbody>
+//       </table>
+    
+//     </div>;
+//   }
+// }
+
+// const element = <EmployeeComponent></EmployeeComponent>
 
 // ReactDOM.render(element, document.getElementById("root"));
 
+// //---Practice Code 14---//
 
-// //---Practice Code 12---//
+function App(){
+    return (<div className="addEmployee">
+      Welcome to App...
+      <ul>
+        <li><Link to="/employees">Employees</Link></li>
+        <li><Link to="/departments">Departments</Link></li>
+        <li><Link to="/projects">Projects</Link></li>
+      </ul>
+      <Routes>
+        <Route path="/employees" element={<Employee></Employee>}></Route>
+        <Route path="/departments" element={<Department></Department>}></Route>
+        <Route path="/projects" element={<Project></Project>}></Route>
+      </Routes>
+    </div>)
+}
 
+ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"));
