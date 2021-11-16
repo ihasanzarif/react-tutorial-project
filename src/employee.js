@@ -22,6 +22,7 @@ function Employee() {
                     <th>Name</th>
                     <th>Location</th>
                     <th>Salary</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@ function Employee() {
                      <td>{emp.name}</td>
                      <td>{emp.location}</td>
                      <td>{emp.salary}</td>
+                     <td><a href={'/editEmployee/'+emp.id}>Edit</a></td>
                  </tr>
                 ))}
             </tbody>

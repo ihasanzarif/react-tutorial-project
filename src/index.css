@@ -46,3 +46,13 @@ code {
   color: slategray;
   font-weight: 800;
 }
+
+.navList{
+  list-style: none;
+  display: block;
+}
+
+.navList li{
+  display: block;
+  padding: 5px;
+}

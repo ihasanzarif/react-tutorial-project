@@ -6,7 +6,8 @@ import {BrowserRouter, Link, Routes, Route, NavLink, useParams} from 'react-rout
 import Employee from "./employee";
 import Department from "./department"
 import Project from "./project";
-import NotFound from "./notFound"
+import NotFound from "./notFound";
+import EditEmployee from "./editEmployee";
 
 // //---Practice Code 1---//
 // const element = <h1 className="testClass">Welcome to Zarif's World.....</h1>;
@@ -606,3 +607,26 @@ import NotFound from "./notFound"
 
 // //---Practice Code 16--- React URL Parameters (Employee Edit using Id) ---//
 
+function App(){
+  return (
+    <div className="addEmployee">
+      <ul className="navList">
+        <li><NavLink to="/" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Employees</NavLink></li>
+        <li><NavLink to="/departments" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Departments</NavLink></li>
+        <li><NavLink to="/projects" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Projects</NavLink></li>
+      </ul>
+      <div>
+        <Routes>
+          <Route path="/" element={<Employee></Employee>}></Route>
+          <Route path="/departments" element={<Department></Department>}></Route>
+          <Route path="/projects" element={<Project></Project>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
+          <Route path="/editEmployee/:id" element={<EditEmployee></EditEmployee>}></Route>
+        </Routes>
+      </div>
+     
+    </div>
+  )
+}
+
+ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"))
