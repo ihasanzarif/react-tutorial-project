@@ -2,10 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import './index.css';
 import axios from 'axios';
-import {BrowserRouter, Link, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Link, Routes, Route, NavLink, useParams} from 'react-router-dom'
 import Employee from "./employee";
 import Department from "./department"
 import Project from "./project";
+import NotFound from "./notFound"
 
 // //---Practice Code 1---//
 // const element = <h1 className="testClass">Welcome to Zarif's World.....</h1>;
@@ -399,7 +400,7 @@ import Project from "./project";
 // const element = <DisplayEmployeeData employeeList={employees}></DisplayEmployeeData>
 
 // ReactDOM.render(element, document.getElementById("root"))
-// //---Practice Code 12---//
+// //--- Practice Code 12 --- Get User Data ---//
 
 // class EmployeeComponent extends React.Component {
 //   constructor(props) {
@@ -450,7 +451,8 @@ import Project from "./project";
 
 // ReactDOM.render(element, document.getElementById("root"))
 
-// //---Practice Code 13---//
+
+// //---Practice Code 13--- User Post Data ---//
 
 // class EmployeeComponent extends React.Component {
 //   constructor(props) {
@@ -555,22 +557,52 @@ import Project from "./project";
 
 // ReactDOM.render(element, document.getElementById("root"));
 
-// //---Practice Code 14---//
 
-function App(){
-    return (<div className="addEmployee">
-      Welcome to App...
-      <ul>
-        <li><Link to="/employees">Employees</Link></li>
-        <li><Link to="/departments">Departments</Link></li>
-        <li><Link to="/projects">Projects</Link></li>
-      </ul>
-      <Routes>
-        <Route path="/employees" element={<Employee></Employee>}></Route>
-        <Route path="/departments" element={<Department></Department>}></Route>
-        <Route path="/projects" element={<Project></Project>}></Route>
-      </Routes>
-    </div>)
-}
+// //---Practice Code 14--- Route in React ---//
 
-ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"));
+// function App(){
+//     return (<div className="addEmployee">
+//       Welcome to App...
+//       <ul>
+//         <li><Link to="/">Employees</Link></li>
+//         <li><Link to="/departments">Departments</Link></li>
+//         <li><Link to="/projects">Projects</Link></li>
+//       </ul>
+//       <Routes>
+//         <Route path="/" element={<Employee></Employee>}></Route>
+//         <Route path="/departments" element={<Department></Department>}></Route>
+//         <Route path="/projects" element={<Project></Project>}></Route>
+//         <Route path="/departments" element={<Employee></Employee>}></Route>
+//       </Routes>
+//     </div>)
+// }
+
+// ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"));
+
+
+// //---Practice Code 15--- Route in React - NavLink & Handling Invalid Path ---//
+
+// function App() {
+//   return (
+//     <div className="addEmployee">
+//       <ul>
+//         <li><NavLink to="/" className={(linkActive) => linkActive.isActive ? 'navLink' : ''}>Employees</NavLink></li>
+//         <li><NavLink to="/departments" className={(linkActive) => linkActive.isActive ? 'navLink' : ''}>Departments</NavLink></li>
+//         <li><NavLink to="/projects" className={(linkActive) => linkActive.isActive ? 'navLink' : ''}>Projects</NavLink></li>
+//       </ul>
+//       <Routes>
+//         <Route path="*" element={<NotFound></NotFound>}></Route>
+//         <Route path="/" element={<Employee></Employee>}></Route>
+//         <Route path="/departments" element={<Department></Department>}></Route>
+//         <Route path="/projects" element={<Project></Project>}></Route>
+
+//       </Routes>
+//     </div>
+//   )
+// }
+
+// ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"))
+
+
+// //---Practice Code 16--- React URL Parameters (Employee Edit using Id) ---//
+

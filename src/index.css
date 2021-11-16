@@ -41,3 +41,8 @@ code {
   border: 2px royalblue solid;
   border-collapse:collapse;
 }
+
+.navLink{
+  color: slategray;
+  font-weight: 800;
+}
