@@ -611,17 +611,17 @@ function App(){
   return (
     <div className="addEmployee">
       <ul className="navList">
-        <li><NavLink to="/" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Employees</NavLink></li>
+        <li><NavLink to="/employees" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Employees</NavLink></li>
         <li><NavLink to="/departments" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Departments</NavLink></li>
         <li><NavLink to="/projects" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Projects</NavLink></li>
       </ul>
       <div>
         <Routes>
-          <Route path="/" element={<Employee></Employee>}></Route>
+          <Route path="/employees" element={<Employee></Employee>}></Route>
+          <Route path="/editEmployees/:id" element={<EditEmployee></EditEmployee>}></Route>
           <Route path="/departments" element={<Department></Department>}></Route>
           <Route path="/projects" element={<Project></Project>}></Route>
           <Route path="*" element={<NotFound></NotFound>}></Route>
-          <Route path="/editEmployee/:id" element={<EditEmployee></EditEmployee>}></Route>
         </Routes>
       </div>
      

@@ -2,17 +2,18 @@ import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
 import Employee from "./employee";
+import {useParams} from "react-router-dom";
 
-function EditEmployee(props){
+function EditEmployee(){
+    const params = useParams();
     const [employee, setEmployee] = useState({});
 
     useEffect(() => {
-        axios.get("https://localhost:44341/api/Employee"+props.id).then(
+        axios.get("https://localhost:44341/api/Employee/"+params.id).then(
             result => {
                 setEmployee(result.data)
-                console.log(result.data)
         })
-    })
+    }, [])
 
     return (
         <div>

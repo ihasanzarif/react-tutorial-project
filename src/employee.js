@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 function Employee() {
     const [employees,setEmployees] = useState([]);
 
-
     useEffect(() => {
         axios.get('https://localhost:44341/api/Employee')
           .then((response) => {
@@ -32,11 +31,12 @@ function Employee() {
                      <td>{emp.name}</td>
                      <td>{emp.location}</td>
                      <td>{emp.salary}</td>
-                     <td><a href={'/editEmployee/'+emp.id}>Edit</a></td>
+                     <td><a href={'/editEmployees/'+emp.id}>Edit</a></td>
                  </tr>
                 ))}
             </tbody>
         </table>
+        
     </div>
 }
 
