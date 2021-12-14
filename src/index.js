@@ -8,6 +8,7 @@ import Department from "./department"
 import Project from "./project";
 import NotFound from "./notFound";
 import EditEmployee from "./editEmployee";
+import { useEffect, useState } from "react/cjs/react.development";
 
 // //---Practice Code 1---//
 // const element = <h1 className="testClass">Welcome to Zarif's World.....</h1>;
@@ -607,26 +608,201 @@ import EditEmployee from "./editEmployee";
 
 // //---Practice Code 16--- React URL Parameters (Employee Edit using Id) ---//
 
-function App(){
-  return (
-    <div className="addEmployee">
-      <ul className="navList">
-        <li><NavLink to="/employees" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Employees</NavLink></li>
-        <li><NavLink to="/departments" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Departments</NavLink></li>
-        <li><NavLink to="/projects" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Projects</NavLink></li>
-      </ul>
-      <div>
-        <Routes>
-          <Route path="/employees" element={<Employee></Employee>}></Route>
-          <Route path="/editEmployees/:id" element={<EditEmployee></EditEmployee>}></Route>
-          <Route path="/departments" element={<Department></Department>}></Route>
-          <Route path="/projects" element={<Project></Project>}></Route>
-          <Route path="*" element={<NotFound></NotFound>}></Route>
-        </Routes>
-      </div>
+// function App(){
+//   return (
+//     <div className="addEmployee">
+//       <ul className="navList">
+//         <li><NavLink to="/" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Employees</NavLink></li>
+//         <li><NavLink to="/departments" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Departments</NavLink></li>
+//         <li><NavLink to="/projects" className={(navLink) => navLink.isActive ? 'navLink' : ''}>Projects</NavLink></li>
+//       </ul>
+//       <div>
+//         <Routes>
+//           <Route path="/" element={<Employee></Employee>}></Route>
+//           <Route path="/editEmployees/:id" element={<EditEmployee></EditEmployee>}></Route>
+//           <Route path="/departments" element={<Department></Department>}></Route>
+//           <Route path="/projects" element={<Project></Project>}></Route>
+//           <Route path="*" element={<NotFound></NotFound>}></Route>
+//         </Routes>
+//       </div>
      
-    </div>
-  )
+//     </div>
+//   )
+// }
+
+// ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"))
+
+
+// //---Practice Code 16--- HOOKS (useState) ---//
+
+// function NewEmployee(){
+//     const [employee, setEmployee] = useState({});
+
+//     function changeEmployeeInfo(e){
+//         setEmployee({...employee,[e.target.name]: e.target.value})
+//     }
+//     return (
+//         <div>
+//             <h2>Welcome to Employee function component..</h2>
+//             <p>
+//                 <label>Employee ID: </label>
+//                 <input type="text" name="Id" value={employee.Id} onChange={changeEmployeeInfo}></input>
+//             </p>
+//             <p>
+//                 <label>Employee Name: </label>
+//                 <input type="text" name="Name" value={employee.Name} onChange={changeEmployeeInfo}></input>
+//             </p>
+//             <p>
+//                 <label>Location: </label>
+//                 <input type="text" name="Location" value={employee.Location} onChange={changeEmployeeInfo}></input>
+//             </p>
+//             <p>
+//                 <label>Salary: </label>
+//                 <input type="text" name="Salary" value={employee.Salary} onChange={changeEmployeeInfo}></input>
+//             </p>
+//             <h2>New Employee Details..</h2>
+//             <p>ID: <b>{employee.Id}</b></p>
+//             <p>Name: <b>{employee.Name}</b></p>
+//             <p>Location: <b>{employee.Location}</b></p>
+//             <p>Salary: <b>{employee.Salary}</b></p>
+//             <SalaryComponent salary={employee.Salary} onSalaryChange={changeEmployeeInfo}></SalaryComponent>
+//         </div>
+//     )
+// }
+
+// const SalaryComponent =({salary,onSalaryChange})=>{
+//     return (
+//         <div>
+//             <h2>Salary Details..</h2>
+//             <p>
+//                 <label>Employee Salary: </label>
+//                 <input type="text" name="Salary" value={salary} onChange={onSalaryChange}></input>
+//             </p>
+//         </div>
+//     )
+// }
+
+// const element = <NewEmployee></NewEmployee>
+
+// ReactDOM.render(element, document.getElementById("root"))
+
+
+// //---Practice Code 17--- HOOKS (useEffect Part 1) ---//
+
+// function EmployeeComponent() {
+//     const [employees, setEmployees] = useState([]);
+
+//     useEffect(()=>{
+//         axios.get('https://localhost:44341/api/Employee').then(response => {
+//             setEmployees(response.data);
+//             console.log(response.data)
+//         })
+//     },[])
+//     return (
+//         <div>
+//             <h2> Employee List</h2>
+//             <table>
+//                 <thead>
+//                     <tr>
+//                         <th>ID</th>
+//                         <th>Name</th>
+//                         <th>Location</th>
+//                         <th>Salary</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody>
+//                     {employees.map((emp, index) => (
+//                         <tr key={index}>
+//                             <td>{emp.id}</td>
+//                             <td>{emp.name}</td>
+//                             <td>{emp.location}</td>
+//                             <td>{emp.salary}</td>
+//                         </tr>
+//                     ))}
+//                 </tbody>
+//             </table>
+//         </div>
+//     )
+// }
+
+// ReactDOM.render(<EmployeeComponent></EmployeeComponent>, document.getElementById('root'))
+
+
+// //---Practice Code 18--- HOOKS (useEffect Part 2 - Search Employee by Name) ---//
+
+// function EmployeeData() {
+//     const [employees, setEmployee] = useState([])
+//     const [searchText, setSearchText] = useState("");
+
+//     useEffect(() => {
+//         axios.get("https://localhost:44341/api/Employee").then((response) => {
+//             setEmployee(response.data);
+//         })
+//     }, [])
+
+//     useEffect(() => {
+//         axios.get("https://localhost:44341/api/Employee/" + searchText).then((response) => {
+//             setEmployee(response.data);
+//         })
+//     }, [searchText])
+
+//     function onSearchTextChange(e) {
+//         setSearchText(e.target.value)
+//     }
+
+//     return (
+//         <div>
+//             <h2>Employees Data</h2>
+//             <label>Search By Name : </label><input type="text" value={searchText} onChange={onSearchTextChange}></input>
+//             <br /><br />
+//             <table>
+//                 <thead>
+//                     <tr>
+//                         <th>ID</th>
+//                         <th>Name</th>
+//                         <th>Location</th>
+//                         <th>Salary</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody>
+//                     {employees.map((emp, index) => (
+//                         <tr key={index}>
+//                             <td>{emp.id}</td>
+//                             <td>{emp.name}</td>
+//                             <td>{emp.location}</td>
+//                             <td>{emp.salary}</td>
+//                         </tr>
+//                     ))}
+//                 </tbody>
+//             </table>
+//         </div>
+//     )
+// }
+
+// ReactDOM.render(<EmployeeData></EmployeeData>, document.getElementById('root'))
+
+
+// //---Practice Code 19--- HOOKS (useEffect Part 3 - Search Employee by Name) ---//
+
+function Employees() {
+    const [employeesCount, setEmployeesCount] = useState(0);
+
+    useEffect(()=> {
+       const handle = setInterval(()=>{
+        axios.get("https://localhost:44341/api/Employee").then((response) => {
+            setEmployeesCount(response.data.length)
+        })
+       }, 5000);
+       
+       return ()=> clearInterval(handle);
+    },[employeesCount])
+
+    return (
+        <div>
+            <h2>Welcome to Employee Component</h2>
+            <p><label>Total Employees : </label><i>{employeesCount}</i></p>
+        </div>
+    )
 }
 
-ReactDOM.render(<BrowserRouter><App></App></BrowserRouter>, document.getElementById("root"))
+ReactDOM.render(<Employees></Employees>, document.getElementById('root'))
